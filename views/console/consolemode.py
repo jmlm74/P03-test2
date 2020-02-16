@@ -1,6 +1,9 @@
 # Created by jmlm at 15/02/2020-22:28 - test2
 import platform
 import os
+from models.map import Map
+from models.position import Position
+from setup import NB_COLS, NB_LINES, MC_GYVER
 
 
 def clear():
@@ -10,15 +13,29 @@ def clear():
         os.system("clear")
 
 
-class Carte:
-    def __init__(self, filename):
-        file = open(filename, "r")
-        self.labyprt = file.read()
-        file.close()
+class MapDisplay:
+    def __init__(self, map, hero):
+        self.map = map
+        self.hero = hero
 
     def __repr__(self):
-        return "{}".format(self.labyprt)
+        clear()
+        for x in range(NB_LINES+1):
+            line = ''
+            for y in range(NB_COLS+1):
+                mypos = Position(x, y)
+                # test si chemin --> oui peut aussi etre le debut ou la sortie
+                if self.map.is_path_position(mypos):
+                    if self.hero.position == mypos:
+                        line += MC_GYVER
+                    elif self.map.get_goal == mypos:
+                        line += 'G'
+                    elif self.map.get_start == mypos:
+                        line += 'S'
+                    else:
+                        line += ' '
+                else:
+                    line += 'W'
 
-    def creer_labyrinthe_depuis_chaine(self, chaine):
-        ligne_liste = chaine.split("\n")
-        return ligne_liste
+            print(line)
+        return '\n'

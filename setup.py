@@ -4,3 +4,14 @@ PATH_BLOCK = "."
 WALL_BLOCK = "w"
 START_BLOCK = "S"
 GOAL_BLOCK = "G"
+NB_COLS = 14
+NB_LINES = 14
+MC_GYVER = "M"
+CHOICES = {
+    'R': 'right',
+    'L': 'left',
+    'U': 'up',
+    'D': 'down',
+    'Q': 'quit',
+    'S': 'save'
+    }

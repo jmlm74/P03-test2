@@ -37,3 +37,8 @@ class Position:
     def left(self):
         x, y = self.position
         return Position(x, y-1)
+
+    def getxy(self):
+        x, y = self.position
+        position_tuple =  x, y
+        return position_tuple
