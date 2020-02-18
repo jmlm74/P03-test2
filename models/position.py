@@ -1,7 +1,6 @@
 # Created by jmlm at 15/02/2020-17:36 - test1
 
 
-
 class Position:
     """
     sert a determiner la position des items dans le labyrinthe (murs, passages, héros, items...)
@@ -45,7 +44,18 @@ class Position:
         x, y = self.position
         return Position(x, y-1)
 
+    @property
     def getxy(self):
         x, y = self.position
         position_tuple = x, y
         return position_tuple
+
+    @property
+    def getx(self):
+        x, y = self.position
+        return x
+
+    @property
+    def gety(self):
+        x, y = self.position
+        return y

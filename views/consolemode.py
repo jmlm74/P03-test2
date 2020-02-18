@@ -53,6 +53,9 @@ class MapDisplay:
                         line += ' '
                 else:
                     line += 'W'
-
-            print(line)
+            self.affiche(line)
         return '\n'
+
+    def affiche(self, line):
+        print(line)
+        return

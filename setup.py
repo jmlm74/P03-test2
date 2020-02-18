@@ -3,6 +3,8 @@
 Les constantes globales
 """
 
+
+# defines
 NB_ITEMS = 3
 PATH_BLOCK = "."
 WALL_BLOCK = "w"
@@ -19,3 +21,10 @@ CHOICES = {
     'Q': 'quit',
     'S': 'save'
     }
+
+# pygame
+SCREEN_WIDTH = 630
+SCREEN_HEIGTH = 630
+SPRITE_HEIGTH = SCREEN_HEIGTH / NB_COLS
+SPRITE_WIDTH = SCREEN_WIDTH / NB_COLS
+

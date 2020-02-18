@@ -1,9 +1,14 @@
 # Created by jmlm at 15/02/2020-21:36 - test2
 from models.hero import Hero
+from models.herograph import HeroGraph
 from models.map import Map
 from controllers.command import parse_arguments
 from views.consolemode import clear
 from controllers.playtxt import game_text
+from controllers.playgraphic import game_graphic
+import pygame
+from setup import SCREEN_WIDTH, SCREEN_HEIGTH
+
 
 """
 Labyrinthe - ligne de commande : python Labyrinthe.py [-h] [-t] [-g]
@@ -28,12 +33,16 @@ def main():
 
     args = parse_arguments()
     map = Map("./data/map012.txt")
-    toto = Hero(map)
     if args.text:
         clear()
+        toto = Hero(map)
         game_text(map, toto)
     else:
-        pass
+        clear()
+        pygame.init()
+        screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGTH))
+        toto = HeroGraph(map)
+        game_graphic(map, toto, screen)
 
 
 if __name__ == "__main__":

@@ -21,6 +21,7 @@ class Hero:
         self.nb_items = 0
         self.victoire = False
         self.mort = False
+        self.text_mode = True
 
     def move(self, direction):
         # si direction up down ... utilise getattr
@@ -28,11 +29,14 @@ class Hero:
         new_pos = getattr(self.position, direction)()
         if self.map.is_path_position(new_pos):
             self.position = new_pos
-            if self.position in self.map.items:
-                self.nb_items += 1
-                self.map.items.remove(self.position)
-            if self.position in self.map.goal:
-                if len(self.map.items) > 0:
-                    self.mort = True
-                else:
-                    self.victoire = True
+            self.test_pos()
+
+    def test_pos(self):
+        if self.position in self.map.items:
+            self.nb_items += 1
+            self.map.items.remove(self.position)
+        if self.position in self.map.goal:
+            if len(self.map.items) > 0:
+                self.mort = True
+            else:
+                self.victoire = True

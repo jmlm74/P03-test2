@@ -19,6 +19,7 @@ class Map:
     """
     def __init__(self, filename):
         self.filename = filename
+        self.text_mode = True
 
         # peut etre en privé --> _paths...
         # TODO rajouter liste collections speciales (items aiguille...)
