@@ -10,6 +10,7 @@ from pygame.locals import (
     KEYDOWN
 )
 from views.graphicmode import MapDisplayGraphic
+from setup import colors
 """
 module pour l'interface utilisateur en mode graphic
 """
@@ -20,15 +21,21 @@ def game_graphic(map, toto, screen):
     clock = pygame.time.Clock()
     map_display_graphic = MapDisplayGraphic(map, toto, screen)
     map_display_graphic.update()
+    couleur = colors['blue']
+    map_display_graphic.message_display("LET'S GO", font="ressource/DejaVuSans.ttf", size=55, wait=3, color=couleur)
+    map_display_graphic = MapDisplayGraphic(map, toto, screen)
+    map_display_graphic.update()
 
     while running:
         if toto.victoire:
             print("GAGNE !!!!!")
-            map_display_graphic.message_display('GAGNE!!!!!!')
+            color = colors['white']
+            map_display_graphic.message_display('GAGNE!!!!!!', size=100, color=color)
             running = False
         elif toto.mort:
             print("PERDU - Vous etes mort !!!")
-            map_display_graphic.message_display("PERDU - Vous etes mort !!!")
+            color = colors['black']
+            map_display_graphic.message_display("PERDU - Vous etes mort !!!", size=45, color=color)
             running = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

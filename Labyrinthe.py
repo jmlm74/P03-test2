@@ -7,7 +7,7 @@ from views.consolemode import clear
 from controllers.playtxt import game_text
 from controllers.playgraphic import game_graphic
 import pygame
-from setup import SCREEN_WIDTH, SCREEN_HEIGTH
+from setup import SCREEN_WIDTH, SCREEN_HEIGTH,MAP_FILE
 
 
 """
@@ -32,7 +32,7 @@ def main():
     """
 
     args = parse_arguments()
-    map = Map("./data/map012.txt")
+    map = Map(MAP_FILE)
     if args.text:
         clear()
         toto = Hero(map)

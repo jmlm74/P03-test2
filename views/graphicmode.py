@@ -3,7 +3,8 @@ import pygame
 import time
 from .consolemode import MapDisplay
 from models.position import Position
-from setup import NB_COLS, NB_LINES, MC_GYVER, SPRITE_WIDTH, SPRITE_HEIGTH, SCREEN_WIDTH, SCREEN_HEIGTH
+from setup import NB_COLS, NB_LINES, SPRITE_WIDTH, SPRITE_HEIGTH, SCREEN_WIDTH, SCREEN_HEIGTH, colors,\
+    ITEM1_FILE, ITEM2_FILE, ITEM3_FILE, BG_FILE, WALL_FILE, GUARD_FILE
 
 
 class MapDisplayGraphic(MapDisplay):
@@ -14,22 +15,20 @@ class MapDisplayGraphic(MapDisplay):
         self.screen = screen
         super().__init__(self.map, self.hero)
         self.text_mode = False
-        path_image = pygame.image.load("data/img/background.jpg").convert()
+        path_image = pygame.image.load(BG_FILE).convert()
         self.path_img = pygame.transform.scale(path_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
-        wall_image = pygame.image.load("data/img/wall.png").convert()
+        wall_image = pygame.image.load(WALL_FILE).convert()
         self.wall_img = pygame.transform.scale(wall_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
-        start_image = pygame.image.load("data/img/start.png").convert()
-        self.start_img = pygame.transform.scale(start_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
-        goal_image = pygame.image.load("ressource/Gardien.png").convert()
+        goal_image = pygame.image.load(GUARD_FILE).convert()
         self.goal_img = pygame.transform.scale(goal_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         self.items = []
-        item1_image = pygame.image.load("ressource/aiguille.png").convert()
+        item1_image = pygame.image.load(ITEM1_FILE).convert()
         self.item1_img = pygame.transform.scale(item1_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         self.items.append(self.item1_img)
-        item2_image = pygame.image.load("ressource/ether.png").convert()
+        item2_image = pygame.image.load(ITEM2_FILE).convert()
         self.item2_img = pygame.transform.scale(item2_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         self.items.append(self.item2_img)
-        item3_image = pygame.image.load("ressource/tube_plastique.png").convert()
+        item3_image = pygame.image.load(ITEM3_FILE).convert()
         self.item3_img = pygame.transform.scale(item3_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         self.items.append(self.item3_img)
         pygame.display.set_caption('P03 - Labyrinthe')
@@ -63,17 +62,29 @@ class MapDisplayGraphic(MapDisplay):
         self.screen.blit(self.hero.hero_img, self.hero.rect)
         pygame.display.update()
 
-# TODO --> mettre size et color en param non obligatoire !
-    def message_display(self, message):
-        police = pygame.font.Font('freesansbold.ttf', 100)
-        textsurf, textrect = self.text_objects(message, police)
-        textrect.center = (SCREEN_WIDTH/2, SCREEN_HEIGTH/2)
-        self.screen.blit(textsurf, textrect)
+    def message_display(self, message, **font_size):
+        font = 'freesansbold.ttf'
+        size = 100
+        wait = 3
+        couleur = colors["red"]
+        for key, value in font_size.items():
+            if key == 'font':
+                font = value
+            elif key == 'size':
+                size = int(value)
+            elif key == 'wait':
+                wait = int(value)
+            elif key == 'color':
+                couleur = value
+        police = pygame.font.Font(font, size)
+        text_surf, text_rect = self.text_objects(message, police, couleur)
+        text_rect.center = (SCREEN_WIDTH/2, SCREEN_HEIGTH/2)
+        self.screen.blit(text_surf, text_rect)
         pygame.display.update()
-        time.sleep(5)
+        time.sleep(wait)
 
-    def text_objects(self, text, font):
-        red = (255, 0, 0)
-        textsurface = font.render(text, True, red)
-        return textsurface, textsurface.get_rect()
+    def text_objects(self, text, font, color='(255, 0, 0)'):
+        # red = (255, 0, 0)
+        text_surface = font.render(text, True, color)
+        return text_surface, text_surface.get_rect()
 

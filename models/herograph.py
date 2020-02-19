@@ -2,7 +2,7 @@
 import pygame
 from models.hero import Hero
 from models.position import Position
-from setup import SPRITE_HEIGTH, SPRITE_WIDTH, SCREEN_HEIGTH, SCREEN_WIDTH
+from setup import SPRITE_HEIGTH, SPRITE_WIDTH, SCREEN_HEIGTH, SCREEN_WIDTH, MC_GYVER_FILE
 
 
 class HeroGraph(pygame.sprite.Sprite, Hero):
@@ -11,7 +11,7 @@ class HeroGraph(pygame.sprite.Sprite, Hero):
         self.text_mode = False
         pygame.sprite.Sprite.__init__(self)
         Hero.__init__(self, self.map)
-        self.hero_image = pygame.image.load("ressource/MacGyver.png").convert()
+        self.hero_image = pygame.image.load(MC_GYVER_FILE).convert()
         self.hero_img = pygame.transform.scale(self.hero_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         self.image = pygame.transform.scale(self.hero_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         self.rect = self.hero_img.get_rect()
