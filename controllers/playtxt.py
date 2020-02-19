@@ -3,19 +3,20 @@ from views.consolemode import MapDisplay
 from setup import CHOICES, NB_ITEMS
 import os
 """
-module pour l'interface utilisateur en mode texte
+TUI or CUI (Text - Console User Interface !) - CLI play module ?
 """
 
 
 def game_text(map: object, toto: object) -> object:
     """
-    On boucle indéfiniment sur le jeu tant que c'est pas gagné ou perdu ou abandonné avec ou sans sauvegarde
-    boucle infinie :
-        - on affiche la map de base en instanciant la classe MapDisplay (avec en parametre la map de base et le hero)
-        - on attend le choix de l'utilisateur --> possibilité de sortie
-    fin boucle
+    loop forever : The player can choose a move and Q to quit
+    the loop is broken only if the player wins or loose ond chose to quit (Q choice)
+    loop :
+        - the map is displayed by instanciating the MapDisplay Class (params : map and Hero with his position)
+        - waiting for the player choice --> can quit
+    end loop
     """
-    # TODO : Sauvegarde et déplacements en diagonale
+
     input_choice = ''
     while True:
         map_display = MapDisplay(map, toto)

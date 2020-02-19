@@ -4,17 +4,34 @@ import time
 from .consolemode import MapDisplay
 from models.position import Position
 from setup import NB_COLS, NB_LINES, SPRITE_WIDTH, SPRITE_HEIGTH, SCREEN_WIDTH, SCREEN_HEIGTH, colors,\
-    ITEM1_FILE, ITEM2_FILE, ITEM3_FILE, BG_FILE, WALL_FILE, GUARD_FILE
+    ITEM1_FILE, ITEM2_FILE, ITEM3_FILE, BG_FILE, WALL_FILE, GUARD_FILE, font_bebas, font_dejavu, font_freesansbold
+
+"""
+GUI class module
+"""
 
 
-class MapDisplayGraphic(MapDisplay):
-
+class MapDisplayGraphic:
+    """
+    class MapDisplayGraphic
+    - the constructor of the graphical labyrinthe
+    - init
+        --> get the map (lists of walls...)
+        --> get the hero (the sprite, the position...)
+        --> get the screen to display everything
+        --> load and transform all the images in sprites (size...)
+    - update
+        The same loop as the console display : loop on the x and y and display the right stripe on each position.
+    - update2
+        update the old position of the hero --> put the path image
+        update the new position --> put the hero
+    message_display --> display a massage (choose your font, color,font_size and how long to see it )
+    music_play --> play a little music at the end
+    """
     def __init__(self, map, hero, screen):
         self.map = map
         self.hero = hero
         self.screen = screen
-        super().__init__(self.map, self.hero)
-        self.text_mode = False
         path_image = pygame.image.load(BG_FILE).convert()
         self.path_img = pygame.transform.scale(path_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         wall_image = pygame.image.load(WALL_FILE).convert()
@@ -63,7 +80,7 @@ class MapDisplayGraphic(MapDisplay):
         pygame.display.update()
 
     def message_display(self, message, **font_size):
-        font = 'freesansbold.ttf'
+        font = font_freesansbold
         size = 100
         wait = 3
         couleur = colors["red"]
@@ -84,7 +101,13 @@ class MapDisplayGraphic(MapDisplay):
         time.sleep(wait)
 
     def text_objects(self, text, font, color='(255, 0, 0)'):
-        # red = (255, 0, 0)
         text_surface = font.render(text, True, color)
         return text_surface, text_surface.get_rect()
 
+    def music_play(self, music):
+        pygame.mixer.init(44100, -16, 2, 2048)
+        clock = pygame.time.Clock()
+        pygame.mixer.music.load(music)
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            clock.tick(10000)

@@ -1,15 +1,18 @@
 # Created by jmlm at 15/02/2020-17:36 - test1
-
+"""
+the positions in the map  (strongly inspired by Thierry Chappuis' webinar )
+"""
 
 class Position:
     """
-    sert a determiner la position des items dans le labyrinthe (murs, passages, héros, items...)
-    init --> prend un x,y et renvoi une position (x, y)
-    __repr__ --> renvoi la position en str
-    __eq__ --> permet de comparer 2 positions
-    up,down,right,left --> renvoient la nouvelle position suivant mouvement demandé (quoi que ce soit - mur ou autre)
-    cette classe ne s'occupe que des positions et non pas des possibilités de déplacement
-    getxy --> renvoi une position d'un x et d'un y sans réinstancier la classe (ressemble à inverse de repr)
+    class position :
+    the labyrinthe's elements position in the map (walls, paths...)
+    init --> cath an x,y et and return a position (x, y)
+    __repr__ --> return the position in string (to print)
+    __eq__ --> comparison between 2 positions --> is it a wall ?
+    up,down,right,left --> return the new position depending of the movement event if the new position is a wall
+    or is outside --> the verifications must be done by the caller
+    getx and gety --> properties which return an x or an y of the instance
     """
 
     def __init__(self, x, y):
@@ -18,16 +21,9 @@ class Position:
     def __repr__(self):
         return str(self.position)
 
-    # pouvoir hasher les postion pour les entrer dans un set (non utilisé ici)
-    def __hash__(self):
-        return hash(self.position)
-
-    # on surcharge l'egalité pour comparer 2 positions (sert a verifier si mur ou autre)
     def __eq__(self, newpos):
         return self.position == newpos.position
 
-# on ne regrade pas les validités des positions
-# TODO - diagonales si OK !
     def up(self):
         x, y = self.position
         return Position(x-1, y)
@@ -43,12 +39,6 @@ class Position:
     def left(self):
         x, y = self.position
         return Position(x, y-1)
-
-    @property
-    def getxy(self):
-        x, y = self.position
-        position_tuple = x, y
-        return position_tuple
 
     @property
     def getx(self):

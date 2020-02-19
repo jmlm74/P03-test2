@@ -6,13 +6,13 @@ from models.position import Position
 from setup import NB_COLS, NB_LINES, MC_GYVER
 
 """
-module pour le display en mode texte seulement
+Display for Text mode only
 """
 
 
 def clear():
     """
-    comme son nom l indique clearscreen
+    It does his name : clearscreen (can't test on Mac and Windows) --> StackoverFlow
     """
     if platform.system() == "Windows":
         os.system("cls")
@@ -22,12 +22,12 @@ def clear():
 
 class MapDisplay:
     """
-    Effectue le display de la map en tenant compte du Hero (noté M), du depart (noté S),due la sortie (notée G)
-    et des ITEMS (notés I).
-    Init --> l'instance récupère la map pour avoir le schema du labyrinthe, le héros pour avoir sa position et
-    les position des items
-    __repr__ (surcharge de repr) --> on boucle sur x,y et a chaque point du labyrinthe, on regarde de quel type de
-    position il s'agit --> mur ou chemin puis le reste et on affiche le point
+    class MapDisplay:
+    Display the map (loop of the game) in the text mode
+    Init --> the instance get the map ta have the labyrinthe's shema and the hero to get his position
+    __repr__  --> loop on x,y and at each position we look for the model (wall, path, Item Hero...) and add it
+    onto the current line
+    display_line : print the current line (with \n)
     """
     def __init__(self, map, hero):
         self.map = map
@@ -53,9 +53,9 @@ class MapDisplay:
                         line += ' '
                 else:
                     line += 'W'
-            self.affiche(line)
+            self.display_line(line)
         return '\n'
 
-    def affiche(self, line):
+    def display_line(self, line):
         print(line)
         return

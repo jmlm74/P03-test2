@@ -1,13 +1,13 @@
 # Created by jmlm at 15/02/2020-22:35 - test2
 import argparse
 """
-parse des arguments (parametres) avec argparse
+args parser with argparse
 """
 
 
 def parse_arguments():
     """
-    renvoi les arguments parsés. Le traitement se fait dans le module appelant
+    return parsed agrs --> treated by the caller
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", '--text', action='store_true', help="""game in text mode""")

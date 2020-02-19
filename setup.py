@@ -35,11 +35,13 @@ WALL_FILE = "ressource/wall.png"
 ITEM1_FILE = "ressource/aiguille.png"
 ITEM2_FILE = "ressource/ether.png"
 ITEM3_FILE = "ressource/tube_plastique.png"
+LOOSE_MUSIC = "ressource/8548.mp3"
+WIN_MUSIC = "ressource/8548-1.mp3"
 
 # fonts
-freesansbold = "freesansbold.ttf"
-dejavu = "ressource/DejaVuSans.ttf"
-bebas = "ressource/BebasNeue-Regular.ttf"
+font_freesansbold = "freesansbold.ttf"
+font_dejavu = "ressource/DejaVuSans.ttf"
+font_bebas = "ressource/BebasNeue-Regular.ttf"
 
 # colors
 colors = {

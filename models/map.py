@@ -4,30 +4,28 @@ from setup import WALL_BLOCK, START_BLOCK, PATH_BLOCK, NB_ITEMS
 import random
 
 """
-La map du labyrinthe (fortement inspirée par webinaire de Thierry Chappuis) en mémoire
+the Labyrinthe map (strongly inspired by Thierry Chappuis' webinar ) in memory
 """
 
 
 class Map:
     """
-    La classe Map --> va définir le dessin de la map et les méthodes pour la manipuler (déplacements du héros)
-    init --> on récupère le nom du fichier puis on mets toutes les positions dans les listes qui vont bien avec
-         la fonction load_from_file.
-         Les listes start et goals sont des listes avec 1 item
-    def_start et def_goal --> propriétés car renvoient une valeur sans prendre de parametres
-    put_items --> prend aléatoirement 3 positions de chemin sans depart et arrivée et place les items
+    La classe Map :
+    - define the map and the methods to manipulate it (hero movements, position...)
+    init --> get the filename of the map the call methods to fill the lists
+    properties (getx, gety... ) Return the x, the Y ... of the current position
+    load from file : load the map in lists - walls, paths , start and goal position (list with 1 Item) -
+        don't forget to remove the \n at the end of the file's lines
+    put_items --> randomize 3 positions in the paths list but the start and the goal positions. Put them in a lis
     """
     def __init__(self, filename):
         self.filename = filename
-        self.text_mode = True
 
-        # peut etre en privé --> _paths...
-        # TODO rajouter liste collections speciales (items aiguille...)
-        self.paths = []  # les chemins
-        self.walls = []  # les murs
-        self.start = []  # le heros
-        self.goal = []   # la sortie
-        self.items = []  # les objets
+        self.paths = []
+        self.walls = []
+        self.start = []
+        self.goal = []
+        self.items = []
 
         self.load_load_from_file()
         self.put_items()
@@ -50,8 +48,6 @@ class Map:
         with open(self.filename) as infile:
             for x, line in enumerate(infile):
                 for y, col in enumerate(line):
-                    # ici on verifie si murs, passages, arrivee et depart
-                    # voir strip pour \n en fin de ligne
                     if col == '\n':
                         continue
                     elif col == START_BLOCK:
@@ -70,5 +66,5 @@ class Map:
         my_dummy_list = self.paths[:]
         my_dummy_list.remove(self.start[0])
         my_dummy_list.remove(self.goal[0])
-        self.items = random.sample( my_dummy_list, NB_ITEMS)
+        self.items = random.sample(my_dummy_list, NB_ITEMS)
 

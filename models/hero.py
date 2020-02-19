@@ -1,31 +1,29 @@
 # Created by jmlm at 15/02/2020-17:49 - test1
 """
-Le hero --> tres fortement inspiré par le webinaire de Thierry Chappuis
+The hero --> strongly inspired by Thierry Chappuis' webinar
 """
 
 
 class Hero:
     """
-    init --> la map dans lequel se trouve le heros + sa position de départ (pas obligatoirement (0, 0))
-         --> initialise la variable
-    move --> deplacement du héros
-         --> le getattr() permet d'eviter les if "up", "down"...
-         --> ne donne la nouvelle position que si c'est un chemin (traite d'un coup les murs et hors du labyrinthe)
-         en appelant la méthode de Map is_path_position qui renvoie True si OK
-         --> traite les items et la victoire
+    class Hero :
+    init --> the map + hero's start position (not necessary (0, 0))
+         --> The different variable I'll need
+    move --> Hero's move
+         --> with getattr() --> avoid  if "up", "down"... the parameter (string) is transformed as an objet property
+         --> return the new position only if it's a path (walls and outside of the Labyrinthe are treated in one pass)
+         calling a Map property :  is_path_position --> return True if OK (path)
+    test_pos --> the 3 items in the table. Remove one by one when the hero catch one of them. The victory is
+    only possible when the list is empty the the goal reached
     """
-    # TODO : Les items
     def __init__(self, map):
         self.map = map
         self.position = map.get_start
         self.nb_items = 0
         self.victoire = False
         self.mort = False
-        self.text_mode = True
 
     def move(self, direction):
-        # si direction up down ... utilise getattr
-        # getattr() can access an object property using a string --> transforme string en propriété
         new_pos = getattr(self.position, direction)()
         if self.map.is_path_position(new_pos):
             self.position = new_pos
