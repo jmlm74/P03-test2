@@ -11,24 +11,25 @@ from setup import SCREEN_WIDTH, SCREEN_HEIGTH,MAP_FILE
 
 
 """
-Labyrinthe - ligne de commande : python Labyrinthe.py [-h] [-t] [-g]
+Labyrinthe - command line : python Labyrinthe.py [-h] [-t] [-g]
 -h --> help
--t mode text
--g mode graphic
---- Repertoires ---
-controllers --> interactions avec utilisateur - ligne de commande + "moteur"
-data --> maps des labyrinthes
-events : N/A
-models : Jeu en mémoire --> map - hero - position
-views : display 
+-t --> text mode
+-g --> graphic mode
+--- Directories ---
+controllers --> user interface modules (the loops game)
+ressource --> external resources (map shema, sounds, images...)
+models : game objects --> map - hero (text and graph) - position
+views : display objects
 """
 
 
 def main():
     """
-    traitement des paramètres de la ligne de commande (mode texte ou graphique) puis chargement en mémoire des items
-    communs (map complete avec les méthodes (position du héros et items compris) + héros avec ses méthodes)
-    suivant paramètre lancement du jeu en mode texte ou graphique
+    parse parameters.
+    The init is done here :
+    - The map object remain the same in text or graphic mode --> instantiated at the begining and once
+    - the hero and the output (text or graphic) mode are also instantiated here
+        (toto is for the film 'toto le heros')
     """
 
     args = parse_arguments()
