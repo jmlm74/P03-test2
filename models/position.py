@@ -7,6 +7,7 @@ class Position:
     """
     class position :
     the labyrinthe's elements position in the map (walls, paths...)
+
     init --> cath an x,y et and return a position (x, y)
     __repr__ --> return the position in string (to print)
     __eq__ --> comparison between 2 positions --> is it a wall ?

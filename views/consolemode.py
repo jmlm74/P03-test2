@@ -24,6 +24,12 @@ class MapDisplay:
     """
     class MapDisplay:
     Display the map (loop of the game) in the text mode
+
+    - instance attributes
+        parameters :
+            map --> THE map
+            hero --> THE hero
+
     Init --> the instance get the map ta have the labyrinthe's shema and the hero to get his position
     __repr__  --> loop on x,y and at each position we look for the model (wall, path, Item Hero...) and add it
     onto the current line

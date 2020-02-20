@@ -1,6 +1,6 @@
 # Created by jmlm at 17/02/2020-20:15 - test2
 import pygame
-import time
+import time, sys
 from .consolemode import MapDisplay
 from models.position import Position
 from setup import NB_COLS, NB_LINES, SPRITE_WIDTH, SPRITE_HEIGTH, SCREEN_WIDTH, SCREEN_HEIGTH, colors,\
@@ -14,7 +14,15 @@ GUI class module
 class MapDisplayGraphic:
     """
     class MapDisplayGraphic
-    - the constructor of the graphical labyrinthe
+    - the builder of the graphical labyrinthe
+
+    - instance attributes :
+        parameters
+            map --> THE map
+            hero --> THE hero
+            screen --> pygame screen to blit the sprites
+        *_img --> the sprites (wall, paths, items...)
+
     - init
         --> get the map (lists of walls...)
         --> get the hero (the sprite, the position...)
@@ -105,9 +113,16 @@ class MapDisplayGraphic:
         return text_surface, text_surface.get_rect()
 
     def music_play(self, music):
-        pygame.mixer.init(44100, -16, 2, 2048)
-        clock = pygame.time.Clock()
-        pygame.mixer.music.load(music)
-        pygame.mixer.music.play()
-        while pygame.mixer.music.get_busy():
-            clock.tick(10000)
+        """
+        open/init mixer via pygame - load file then play and loop to wait until the end !
+        if no mixer found --> handle exception
+        """
+        try:
+            pygame.mixer.init(44100, -16, 2, 2048)
+            clock = pygame.time.Clock()
+            pygame.mixer.music.load(music)
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy():
+                clock.tick(10000)
+        except pygame.error:
+            print("Erreur : ouverture sound-device %s" % sys.exc_info()[0])

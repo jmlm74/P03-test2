@@ -22,11 +22,11 @@ def game_text(map: object, toto: object) -> object:
         map_display = MapDisplay(map, toto)
         print(map_display)
         print('\n')
-        if toto.victoire:
+        if toto.won:
             print("GAGNE !!!!!")
             break
-        elif toto.mort:
-            print("PERDU - Vous etes mort !!!")
+        elif toto.dead:
+            print("PERDU - Vous etes dead !!!")
             break
         print("nb items to catch : {} - nb items caught : {}".format(NB_ITEMS, toto.nb_items))
         print("select your input : ")

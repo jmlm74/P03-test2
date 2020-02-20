@@ -10,19 +10,25 @@ class HeroGraph(pygame.sprite.Sprite, Hero):
     class hero --> The graphical hero :
     parent classes  --> pygame.sprite.Sprite --> Sprites methods
                     --> Hero (non graphical) --> the same attributes and methods
+
+    instance attributes :
+        - hero_img --> the sprite of the hero
+        - rect -> the rectangle
+        - rect.x - rect.y --> the position
+        - old_x - old_y --> the old position
+
     - init : init of the parents + define the image and the scale of the Graphical Hero
-    - move_graph : use the parent's "move" method. The spcificity of the graphical move is the width and
-    the height of the sprites --> the sprite can be outside the screen with an inside position (the position is the
-    upper left corner)
+    - move_graph : use the parent's "move" method. The specificity of the graphical move is the width and
+        the height of the sprites --> the sprite can be outside the screen with an inside position (the position is the
+        upper left corner). Nedd also to backup the old position to blit the background sprite on it after the move
     """
 
     def __init__(self, map):
         self.map = map
         pygame.sprite.Sprite.__init__(self)
         Hero.__init__(self, self.map)
-        self.hero_image = pygame.image.load(MC_GYVER_FILE).convert()
-        self.hero_img = pygame.transform.scale(self.hero_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
-        self.image = pygame.transform.scale(self.hero_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
+        hero_image = pygame.image.load(MC_GYVER_FILE).convert()
+        self.hero_img = pygame.transform.scale(hero_image, (int(SPRITE_HEIGTH), int(SPRITE_WIDTH)))
         self.rect = self.hero_img.get_rect()
         start_pos = self.map.get_start
         self.rect.x = start_pos.getx
@@ -40,7 +46,6 @@ class HeroGraph(pygame.sprite.Sprite, Hero):
         y = self.position.gety
         x *= SPRITE_WIDTH
         y *= SPRITE_HEIGTH
-        self.test_pos()
         self.rect.y = y
         self.rect.x = x
         if self.rect.y < 0:

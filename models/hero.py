@@ -7,8 +7,17 @@ The hero --> strongly inspired by Thierry Chappuis' webinar
 class Hero:
     """
     class Hero :
+    The hero of the game 
+    
+    instance attribute : 
+        map --> THE map 
+        position --> the position during the game
+        nb_items --> nb of items caught
+        won - dead --> the end of the game --> the goal position has been reached. If you 've caught all the
+            items --> won else dead !
+    
     init --> the map + hero's start position (not necessary (0, 0))
-         --> The different variable I'll need
+         --> position is at the start position 
     move --> Hero's move
          --> with getattr() --> avoid  if "up", "down"... the parameter (string) is transformed as an objet property
          --> return the new position only if it's a path (walls and outside of the Labyrinthe are treated in one pass)
@@ -20,8 +29,8 @@ class Hero:
         self.map = map
         self.position = map.get_start
         self.nb_items = 0
-        self.victoire = False
-        self.mort = False
+        self.won = False
+        self.dead = False
 
     def move(self, direction):
         new_pos = getattr(self.position, direction)()
@@ -30,11 +39,11 @@ class Hero:
             self.test_pos()
 
     def test_pos(self):
-        if self.position in self.map.items:
+        if self.map.is_item_position(self.position):
             self.nb_items += 1
-            self.map.items.remove(self.position)
+            self.map.item_remove(self.position)
         if self.position in self.map.goal:
             if len(self.map.items) > 0:
-                self.mort = True
+                self.dead = True
             else:
-                self.victoire = True
+                self.won = True

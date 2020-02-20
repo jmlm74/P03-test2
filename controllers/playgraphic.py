@@ -44,16 +44,16 @@ def game_graphic(map, toto, screen):
     map_display_graphic.update()
 
     while running:
-        if toto.victoire:
+        if toto.won:
             print("GAGNE !!!!!")
             color = colors['white']
             map_display_graphic.message_display('GAGNE!!!!!!', font=font_bebas, wait=1, size=100, color=color)
             running = False
             map_display_graphic.music_play(WIN_MUSIC)
-        elif toto.mort:
-            print("PERDU - Vous etes mort !!!")
+        elif toto.dead:
+            print("PERDU - Vous etes dead !!!")
             color = colors['black']
-            map_display_graphic.message_display("PERDU - Vous etes mort !!!", size=45, wait=1,  color=color)
+            map_display_graphic.message_display("PERDU - Vous etes dead !!!", size=45, wait=1,  color=color)
             running = False
             map_display_graphic.music_play(LOOSE_MUSIC)
         for event in pygame.event.get():
