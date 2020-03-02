@@ -22,21 +22,16 @@ class MapDisplayGraphic:
             hero --> THE hero
             screen --> pygame screen to blit the sprites
         *_img --> the sprites (wall, paths, items...)
-
-    - init
-        --> get the map (lists of walls...)
-        --> get the hero (the sprite, the position...)
-        --> get the screen to display everything
-        --> load and transform all the images in sprites (size...)
-    - update
-        The same loop as the console display : loop on the x and y and display the right stripe on each position.
-    - update2
-        update the old position of the hero --> put the path image
-        update the new position --> put the hero
-    message_display --> display a massage (choose your font, color,font_size and how long to see it )
-    music_play --> play a little music at the end
     """
     def __init__(self, map, hero, screen):
+        """
+        get the map (lists of walls...)
+        get the hero (the sprite, the position...)
+        get the screen to display everything
+        load and transform all the images in sprites (size...)
+        Args: map, hero, screen
+        Returns:
+        """
         self.map = map
         self.hero = hero
         self.screen = screen
@@ -59,6 +54,11 @@ class MapDisplayGraphic:
         pygame.display.set_caption('P03 - Labyrinthe')
 
     def update(self):
+        """
+        The same loop as the console display : loop on the x and y and display the right stripe on each position.
+        Args:
+        Returns:
+        """
         self.screen.blit(self.hero.hero_img, self.hero.rect)
         item = 0
         for x in range(NB_LINES+1):
@@ -83,11 +83,22 @@ class MapDisplayGraphic:
         pygame.display.update()
 
     def update2(self):
+        """
+        update the old position of the hero --> put the path image
+        update the new position --> put the hero
+        Args:
+        Returns:
+        """
         self.screen.blit(self.path_img, (self.hero.old_x, self.hero.old_y))
         self.screen.blit(self.hero.hero_img, self.hero.rect)
         pygame.display.update()
 
     def message_display(self, message, **font_size):
+        """
+        display a massage (choose your font, color,font_size and how long to see it )
+        Args: message, **font_size:
+        Returns:
+        """
         font = font_freesansbold
         size = 100
         wait = 3
@@ -109,11 +120,16 @@ class MapDisplayGraphic:
         time.sleep(wait)
 
     def text_objects(self, text, font, color='(255, 0, 0)'):
+        """
+        Args: text font color(default red)
+        Returns: surface and a rectangle with the text inside
+        """
         text_surface = font.render(text, True, color)
         return text_surface, text_surface.get_rect()
 
     def music_play(self, music):
         """
+        play a little music at the end
         open/init mixer via pygame - load file then play and loop to wait until the end !
         if no mixer found --> handle exception
         """

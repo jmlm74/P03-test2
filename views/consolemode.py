@@ -30,16 +30,27 @@ class MapDisplay:
             map --> THE map
             hero --> THE hero
 
-    Init --> the instance get the map ta have the labyrinthe's shema and the hero to get his position
-    __repr__  --> loop on x,y and at each position we look for the model (wall, path, Item Hero...) and add it
-    onto the current line
-    display_line : print the current line (with \n)
+    Init --> t
+    __repr__  -->
+    display_line :
     """
     def __init__(self, map, hero):
+        """
+        The instance get the map ta have the labyrinthe's shema and the hero to get his position
+        Args: map, hero
+        Returns:
+        """
         self.map = map
         self.hero = hero
 
     def __repr__(self):
+        """
+        print the map !
+        loop on x,y and at each position we look for the model (wall, path, Item Hero...) and add it
+        onto the current line
+        Args:
+        Returns:
+        """
         clear()
         for x in range(NB_LINES+1):
             line = ''
@@ -63,5 +74,10 @@ class MapDisplay:
         return '\n'
 
     def display_line(self, line):
+        """
+        print the current line (with \n)
+        Args: line
+        Returns:
+        """
         print(line)
         return

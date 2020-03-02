@@ -16,14 +16,13 @@ class HeroGraph(pygame.sprite.Sprite, Hero):
         - rect -> the rectangle
         - rect.x - rect.y --> the position
         - old_x - old_y --> the old position
-
-    - init : init of the parents + define the image and the scale of the Graphical Hero
-    - move_graph : use the parent's "move" method. The specificity of the graphical move is the width and
-        the height of the sprites --> the sprite can be outside the screen with an inside position (the position is the
-        upper left corner). Nedd also to backup the old position to blit the background sprite on it after the move
     """
 
     def __init__(self, map):
+        """
+        init of the parents + define the image and the scale of the Graphical Hero
+        Args: map
+        """
         self.map = map
         pygame.sprite.Sprite.__init__(self)
         Hero.__init__(self, self.map)
@@ -37,6 +36,13 @@ class HeroGraph(pygame.sprite.Sprite, Hero):
         self.old_y = 0
 
     def move_graph(self, mouv):
+        """
+        use the parent's "move" method. The specificity of the graphical move is the width and
+        the height of the sprites --> the sprite can be outside the screen with an inside position (the position is the
+        upper left corner). Nedd also to backup the old position to blit the background sprite on it after the move
+        Args: mouv
+        Returns:
+        """
         self.old_x = self.rect.x
         self.old_y = self.rect.y
 
