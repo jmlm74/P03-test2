@@ -3,7 +3,7 @@
 
 Simply graphic and text labyrinth game 
 
-![screenshot](https://github.com/jmlm74/P3-McGyver/tree/master/ressource/screenshotg.png?raw=true "screenshot")
+![](/ressource/screenshotg.png?raw=true)
 
 <br/><br />
 
