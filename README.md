@@ -3,7 +3,7 @@
 
 Simply graphic and text labyrinth game 
 
-![screenshot](https://github.com/jmlm74/P3-McGyver/tree/master/ressource/screenshotg.png)
+![screenshot](https://github.com/jmlm74/P3-McGyver/tree/master/ressource/screenshotg.png?raw=true "screenshot")
 
 <br/><br />
 
@@ -24,17 +24,13 @@ You must pick up 3 items before reaching the goal to win otherwise you loose<br 
   - herograph.py --> the hero in graphic mode (inherit hero)
   - map.py --> the map
   - position.py --> the position (tuple (x,y))
-<br />
 - Views : directory views
   - consolemode.py --> the display in console-text mode
   - graphicmode.py --> the display in graphic mode
-<br />
 - controlers : directory controllers
   - playtxt.py --> the game controls in text mode
   - playgraphic.py --> the game controls in graphic mode
-<br />
 - ressource directory contains images,fonts,musics and the map file
-<br />
 - root directory
   - Labyrinthe.py --> main
   - setup.py --> variables and constants
