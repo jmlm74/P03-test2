@@ -49,5 +49,13 @@ colors = {
     'white': (255, 255, 255),
     'red': (255, 0, 0),
     'green': (0, 255, 0),
-    'blue': (0, 0, 255)
+    'blue': (0, 0, 255),
+    'orange': (255, 165, 0)
+}
+# counter color --> depens of items caught
+msg_couleur = {
+    0: 'black',
+    1: 'red',
+    2: 'orange',
+    3: 'green'
 }

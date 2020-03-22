@@ -3,8 +3,9 @@ import pygame
 import time, sys
 from .consolemode import MapDisplay
 from models.position import Position
-from setup import NB_COLS, NB_LINES, SPRITE_WIDTH, SPRITE_HEIGTH, SCREEN_WIDTH, SCREEN_HEIGTH, colors,\
-    ITEM1_FILE, ITEM2_FILE, ITEM3_FILE, BG_FILE, WALL_FILE, GUARD_FILE, font_bebas, font_dejavu, font_freesansbold
+from setup import NB_COLS, NB_LINES, SPRITE_WIDTH, SPRITE_HEIGTH, SCREEN_WIDTH, SCREEN_HEIGTH, colors, NB_ITEMS, \
+    ITEM1_FILE, ITEM2_FILE, ITEM3_FILE, BG_FILE, WALL_FILE, GUARD_FILE, font_bebas, font_dejavu, font_freesansbold, \
+    msg_couleur
 
 """
 GUI class module
@@ -91,11 +92,51 @@ class MapDisplayGraphic:
         """
         self.screen.blit(self.path_img, (self.hero.old_x, self.hero.old_y))
         self.screen.blit(self.hero.hero_img, self.hero.rect)
+        if self.hero.get_item:
+            couleur = colors[msg_couleur[self.hero.nb_items]]
+            self.item_counter_display(font="font_dejavu", color=couleur)
         pygame.display.update()
+
+    def item_counter_display(self, **font_desc):
+        """
+        args : **font_desc --> dictionary contents the desc of the message (font, size,color...)!
+        1st update the 3 sprites to erase the old counter
+        the update the counter changing color occording to number of caught items
+        """
+        font = "font_dejavu"
+        size = 35
+        couleur = colors["black"]
+        for key, value in font_desc.items():
+            if key == 'font':
+                font = value
+            elif key == 'size':
+                size = int(value)
+            elif key == 'wait':
+                wait = int(value)
+            elif key == 'color':
+                couleur = value
+
+        self.screen.blit(self.wall_img, (585, 585))
+        self.screen.blit(self.wall_img, (540, 585))
+        self.screen.blit(self.wall_img, (495, 585))
+        pygame.display.update()
+        police = pygame.font.SysFont(font, size)
+
+        message = "NB ITEMS"
+        text_surf, text_rect = self.text_objects(message, police, couleur)
+        text_rect.x = 495
+        text_rect.y = 585
+        self.screen.blit(text_surf, text_rect)
+        message = str(self.hero.nb_items) + "/" + str(NB_ITEMS)
+        text_surf, text_rect = self.text_objects(message, police, couleur)
+        text_rect.x = 530
+        text_rect.y = 605
+        self.screen.blit(text_surf, text_rect)
+        self.hero.get_item = False
 
     def message_display(self, message, **font_size):
         """
-        display a massage (choose your font, color,font_size and how long to see it )
+        display a message (choose your font, color,font_size and how long to see it )
         Args: message, **font_size:
         Returns:
         """

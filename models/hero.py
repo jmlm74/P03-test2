@@ -20,12 +20,14 @@ class Hero:
         """
         The map + hero's start position (not necessary (0, 0))
         Position is at the start position
+        get_item is set to true to display the first counter : 0/NB_ITEMS
         """
         self.map = map
         self.position = map.get_start
         self.nb_items = 0
         self.won = False
         self.dead = False
+        self.get_item = True
 
     def move(self, direction):
         """
@@ -48,8 +50,10 @@ class Hero:
         Args :
         Returns:
         """
+        self.get_item = False
         if self.map.is_item_position(self.position):
             self.nb_items += 1
+            self.get_item = True
             self.map.item_remove(self.position)
         if self.position in self.map.goal:
             if len(self.map.items) > 0:
